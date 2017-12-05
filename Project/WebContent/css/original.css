@@ -1,0 +1,79 @@
+@charset "UTF-8";
+/*ページヘッダー設定*/
+/*ヘッダーテキスト設定*/
+.navbar-default{
+  background-color:#2E9AFE;
+}
+.navbar-default .navbar-brand {
+  color: white;
+}
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:hover {
+  color: #0B4C5F;
+  background-color: transparent;
+}
+/*ログアウトテキスト設定*/
+.logout-link{
+  color:#FE2E2E;
+}
+.logout-link:hover{
+  color:#610B0B;
+}
+
+/*全体共通*/
+/*見出しテキスト設定*/
+h1{
+  text-align:center;
+  line-height:3.0;
+}
+/*戻るボタン設定*/
+.back-page{
+  padding-top: 50px;
+  padding-bottom: 100px;
+  text-align: right;
+}
+/*ユーザー一覧設定*/
+/*ログインID,ユーザー名フォームサイズ*/
+.id-name{
+  width: 700px;
+}
+ /*生年月日フォームサイズ*/
+.birthday{
+  width: 850px;
+}
+
+/*ユーザー新規登録設定*/
+/*入力フォーム設定*/
+.new-data{
+  width:50%;
+  margin:0 auto;
+}
+/*登録ボタン設定*/
+.new-ragistration{
+  text-align: center;
+}
+
+/*ユーザー情報詳細設定*/
+/*ユーザー詳細表示枠位置*/
+.details{
+  margin: 0 auto;
+}
+.label-control-position{
+  text-align: right;
+}
+.form-control-position{
+  padding-top: 7px;
+  padding-left: 50px;
+}
+
+/*ユーザー情報削除設定*/
+/*削除テキスト位置*/
+.form-control-padding{
+  padding-top: 50px;
+  padding-left: 160px;
+  padding-bottom: 50px;
+}
+/*削除ボタンサイズ*/
+.btn-size{
+  width:100px;
+}
