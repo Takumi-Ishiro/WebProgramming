@@ -1,8 +1,10 @@
 <%@page import="model.User"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
+//セッションの取得
 User user = (User)session.getAttribute("user");
-user.getName();
+List<User> userList = (List<User>)request.getAttribute("userList");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,12 +37,12 @@ user.getName();
 
 <!-- body -->
 <body>
-	<div class="container">
+	<div class="container" style="margin-bottom:75px;">
 		<h1>ユーザー一覧</h1>
 		<div class="text-right">
-    		<a href="userCreate.html">新規登録</a>
+    		<a href="/UserManagement/UserCreate">新規登録</a>
     	</div>
-		<form>
+		<form style="margin-bottom:30px;">
 	  		<div class="form-row id-name">
 	    		<div class="form-group col-md-6">
 	      			<label for="login-id">ログインID</label>
@@ -65,7 +67,8 @@ user.getName();
 			</div>
 			<button type="submit" class="btn btn-primary">検索</button>
 	    </form>
-		<table class="table table-striped" style="margin-top:30px">
+		<div style="height:500px; overflow-y:scroll;">
+		<table class="table table-striped">
 			<thead>
 			   	<tr>
 			   	    <th>ログインID</th>
@@ -75,42 +78,25 @@ user.getName();
 			    </tr>
 			</thead>
 			<tbody>
-
-
-		    	<tr>
-			      	<td> id0001</td>
-		    	  	<td>田中太郎</td>
-		      		<td>1987年05月22日</td>
-		      		<td>
-		      			<a href="userDetail.html" class="btn btn-success">詳細</a>
-		      			<a href="userUpdate.html" class="btn btn-info">更新</a>
-		      			<a href="userDelete.html" class="btn btn-danger">削除</a>
-		      		</td>
-		    	</tr>
-
-
-		    	<tr>
-			      	<td>id0002</td>
-			      	<td>佐藤次郎</td>
-			      	<td>1979年02月15日</td>
-			      	<td>
-			      		<a href="userDetail.html" class="btn btn-success">詳細</a>
-			      		<a href="userUpdate.html" class="btn btn-info">更新</a>
-			      		<a href="userDelete.html" class="btn btn-danger">削除</a>
-			        </td>
-		    	</tr>
-		    	<tr>
-			      	<td>id0003</td>
-			      	<td>佐川真治</td>
-			      	<td>1965年12月31日</td>
-			      	<td>
-			      		<a href="userDetail.html" class="btn btn-success">詳細</a>
-			      		<a href="userUpdate.html" class="btn btn-info">更新</a>
-			      		<a href="userDelete.html" class="btn btn-danger">削除</a>
-			      	</td>
-		    	</tr>
+		    	<%
+		    	for(User list : userList){
+		    	%>
+			    	<tr>
+				      	<td style="vertical-align:middle"><%= list.getLogin_id() %></td>
+			    	  	<td style="vertical-align:middle"><%= list.getName() %></td>
+			      		<td style="vertical-align:middle"><%= list.getBirth_date() %></td>
+			      		<td>
+			      			<a href="/UserManagement/UserDetail?id=<%= list.getId() %>" class="btn btn-success">詳細</a>
+			      			<a href="/UserManagement/UserUpdate?id=<%= list.getId() %>" class="btn btn-info">更新</a>
+			      			<a href="userDelete.html" class="btn btn-danger">削除</a>
+			      		</td>
+			      	</tr>
+		      	<%
+		      	}
+		      	%>
 		   	</tbody>
 		</table>
+		</div>
 	</div>
 </body>
 <!-- /body -->

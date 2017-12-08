@@ -99,5 +99,112 @@ public class User_dataDao {
 		        }
 		    }
 	    }
+	    public User findById(String targetId) {
+	        Connection conn = null;
+	        try {
+	            // データベースへ接続
+	            conn = DBManager.getConnection();
 
+	            // SELECT文を準備
+	            String sql = "SELECT id, login_id, name, birth_date, password, create_date, update_date FROM user_data WHERE id = ?";
+
+	             // SELECTを実行し、結果表を取得
+	            PreparedStatement pStmt = conn.prepareStatement(sql);
+	            pStmt.setString(1, targetId);
+	            ResultSet rs = pStmt.executeQuery();
+
+	             // 主キーに紐づくレコードは1件のみなので、rs.next()は1回だけ行う
+	            if (!rs.next()) {
+	                return null;
+	            }
+	            String id = rs.getString("id");
+                String login_id = rs.getString("login_id");
+                String name= rs.getString("name");
+                String birth_date = rs.getString("birth_date");
+                String password = rs.getString("password");
+                String create_date = rs.getString("create_date");
+                String update_date = rs.getString("update_date");
+	            return new User(id, login_id, name, birth_date, password, create_date, update_date);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return null;
+	        } finally {
+	            // データベース切断
+	        	 if (conn != null) {
+		                try {
+		                    conn.close();
+		                } catch (SQLException e) {
+		                	e.printStackTrace();
+		                    return null;
+		                }
+		        }
+		    }
+	    }
+	    public int insertOffer(String targetLogin_id, String targetName, String targetBirth, String targetPass) {
+	        Connection conn = null;
+	        try {
+	            // データベースへ接続
+	            conn = DBManager.getConnection();
+
+	            // INSERT文を準備
+	            String sql = "INSERT INTO user_data (login_id, name, birth_date, password) values(?, ?, ?, ?)";
+
+	            // INSERT文を実行し、結果表を取得
+	            PreparedStatement pStmt = conn.prepareStatement(sql);
+	            pStmt.setString(1, targetLogin_id);
+	            pStmt.setString(2, targetName);
+	            pStmt.setString(3, targetBirth);
+	            pStmt.setString(4, targetPass);
+
+	            int i = pStmt.executeUpdate();
+	            return i;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return 0;
+			} finally {
+	            // データベース切断
+	        	 if (conn != null) {
+		                try {
+		                    conn.close();
+		                } catch (SQLException e) {
+		                	e.printStackTrace();
+		                    return 0;
+		                }
+		        }
+		    }
+	    }
+	    public int updateOffer(String targetLogin_id, String targetName, String targetBirth, String targetPass, String targetId) {
+	        Connection conn = null;
+	        try {
+	            // データベースへ接続
+	            conn = DBManager.getConnection();
+
+	            // UPDATE文を準備
+	            String sql = "UPDATE user_data SET login_id=?, name=?, birth_date=?, password=? WHERE id=?";
+
+	            // INSERT文を実行し、結果表を取得
+	            PreparedStatement pStmt = conn.prepareStatement(sql);
+	            pStmt.setString(1, targetLogin_id);
+	            pStmt.setString(2, targetName);
+	            pStmt.setString(3, targetBirth);
+	            pStmt.setString(4, targetPass);
+	            pStmt.setString(5, targetId);
+
+	            int i = pStmt.executeUpdate();
+	            return i;
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            return 0;
+			} finally {
+	            // データベース切断
+	        	 if (conn != null) {
+		                try {
+		                    conn.close();
+		                } catch (SQLException e) {
+		                	e.printStackTrace();
+		                    return 0;
+		                }
+		        }
+		    }
+	    }
 }

@@ -1,3 +1,12 @@
+<%@page import="model.User"%>
+<%@page import="java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+//セッションの取得
+User user = (User)session.getAttribute("user");
+//リクエストの取得
+User userDetail = (User)request.getAttribute("userDetail");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,12 +23,12 @@
 	<nav class="navbar navbar-default">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="index.html">ユーザー情報管理システム</a>
+				<a class="navbar-brand" href="/UserManagement/UserList">ユーザー情報管理システム</a>
 			</div>
 			<ul class="nav nav-pills pull-right">
-	  			<li class="nav-link">ユーザ名 さん </li>
+	  			<li class="nav-link"><%= user.getName() %></li>
 	  		    <li class="nav-link">
-	  		    	<a href="index.html" class="navbar-link logout-link">ログアウト</a>
+	  		    	<a href="/UserManagement/Logout" class="navbar-link logout-link">ログアウト</a>
 	            </li>
 	  	    </ul>
 	  	</div>
@@ -33,12 +42,12 @@
 		<h1>ユーザー情報詳細</h1>
 		<div class="card details" style="width: 40rem;">
 			<div class="card-body">
-		    	<h4 class="card-title">田中太郎</h4>
+		    	<h4 class="card-title"><%= userDetail.getName() %></h4>
 		    	<div class="form-group row">
   			  		<label for="login-id" class=" col-sm-4 col-form-label label-control-position">ログインID：</label>
     				<div class="col-sm-8">
     					<p class="form-control-position">
-    						id0001
+    						<%= userDetail.getLogin_id() %>
     					</p>
     				</div>
   				</div>
@@ -46,7 +55,7 @@
   			  		<label for="birth" class=" col-sm-4 col-form-label label-control-position">生年月日：</label>
     				<div class="col-sm-8">
     					<p class="form-control-position">
-    						1989年04月26日
+    						<%= userDetail.getBirth_date() %>
     					</p>
     				</div>
   				</div>
@@ -54,7 +63,7 @@
   			  		<label for="conform" class=" col-sm-4 col-form-label label-control-position">登録日時：</label>
     				<div class="col-sm-8">
     					<p class="form-control-position">
-    						2017年01月01日 19:11
+    						<%= userDetail.getCreate_date() %>
     					</p>
     				</div>
   				</div>
@@ -62,14 +71,14 @@
   			  		<label for="update" class=" col-sm-4 col-form-label label-control-position">更新日時：</label>
     				<div class="col-sm-8">
     					<p class="form-control-position">
-    						2017年09月25日
+    						<%= userDetail.getUpdate_date() %>
     					</p>
     				</div>
   				</div>
 			</div>
 		</div>
 		<div class="col-sm-3 back-page">
-			<a href="userList.html">戻る</a>
+			<a href="/UserManagement/UserList">戻る</a>
 		</div>
 	</div>
 </body>
